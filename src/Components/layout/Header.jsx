@@ -129,7 +129,9 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-slate-900"
+              className={`lg:hidden p-2 rounded-lg text-slate-900 ${
+                mobileMenuOpen ? 'opacity-0 pointer-events-none' : ''
+              }`}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -144,7 +146,7 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-60 lg:hidden"
           >
             <div className="absolute inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
             <motion.div 
