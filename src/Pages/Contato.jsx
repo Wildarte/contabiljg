@@ -15,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
-import { base44 } from '@/api/base44Client';
 
 const contactInfo = [
   {
@@ -66,20 +65,36 @@ export default function Contato() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
-    
-    await base44.entities.ContactLead.create(formData);
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      service: '',
-      message: ''
-    });
+
+    const payload = new FormData();
+    payload.append('name', formData.name);
+    payload.append('email', formData.email);
+    payload.append('phone', formData.phone);
+    payload.append('company', formData.company);
+    payload.append('service', formData.service);
+    payload.append('message', formData.message);
+    payload.append('_captcha', 'false');
+    payload.append('_subject', 'Novo contato pelo site');
+
+    try {
+      await fetch('https://formsubmit.co/ajax/contadora.jgcontabilidade@gmail.com', {
+        method: 'POST',
+        body: payload,
+      });
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        service: '',
+        message: ''
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -184,6 +199,7 @@ export default function Contato() {
                       <Label htmlFor="name">Nome Completo *</Label>
                       <Input 
                         id="name"
+                        name="name"
                         placeholder="Seu nome"
                         required
                         value={formData.name}
@@ -196,6 +212,7 @@ export default function Contato() {
                       <Input 
                         id="email"
                         type="email"
+                        name="email"
                         placeholder="seu@email.com"
                         required
                         value={formData.email}
@@ -210,6 +227,7 @@ export default function Contato() {
                       <Label htmlFor="phone">Telefone *</Label>
                       <Input 
                         id="phone"
+                        name="phone"
                         placeholder="(00) 00000-0000"
                         required
                         value={formData.phone}
@@ -221,6 +239,7 @@ export default function Contato() {
                       <Label htmlFor="company">Empresa</Label>
                       <Input 
                         id="company"
+                        name="company"
                         placeholder="Nome da empresa"
                         value={formData.company}
                         onChange={(e) => setFormData({...formData, company: e.target.value})}
@@ -235,17 +254,31 @@ export default function Contato() {
                       value={formData.service}
                       onValueChange={(value) => setFormData({...formData, service: value})}
                     >
-                      <SelectTrigger className="rounded-xl py-6">
+                      <SelectTrigger className="rounded-xl py-6 bg-transparent">
                         <SelectValue placeholder="Selecione um serviço" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="contabilidade">Contabilidade Empresarial</SelectItem>
-                        <SelectItem value="tributaria">Consultoria Tributária</SelectItem>
-                        <SelectItem value="pessoal">Departamento Pessoal</SelectItem>
-                        <SelectItem value="fiscal">Gestão Fiscal</SelectItem>
-                        <SelectItem value="abertura">Abertura de Empresa</SelectItem>
-                        <SelectItem value="consultoria">Consultoria Empresarial</SelectItem>
-                        <SelectItem value="outro">Outro</SelectItem>
+                      <SelectContent className="bg-white border border-slate-200 shadow-lg">
+                        <SelectItem value="contabilidade" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Contabilidade Empresarial
+                        </SelectItem>
+                        <SelectItem value="tributaria" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Consultoria Tributária
+                        </SelectItem>
+                        <SelectItem value="pessoal" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Departamento Pessoal
+                        </SelectItem>
+                        <SelectItem value="fiscal" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Gestão Fiscal
+                        </SelectItem>
+                        <SelectItem value="abertura" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Abertura de Empresa
+                        </SelectItem>
+                        <SelectItem value="consultoria" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Consultoria Empresarial
+                        </SelectItem>
+                        <SelectItem value="outro" className="data-[highlighted]:bg-slate-100 data-[state=checked]:bg-slate-100">
+                          Outro
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -254,6 +287,7 @@ export default function Contato() {
                     <Label htmlFor="message">Mensagem *</Label>
                     <Textarea 
                       id="message"
+                      name="message"
                       placeholder="Conte-nos mais sobre sua necessidade..."
                       required
                       rows={5}

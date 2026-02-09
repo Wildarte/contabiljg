@@ -1,20 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { 
   Phone, Mail, MapPin, Clock, 
   Instagram,
-  ArrowRight,
-  CheckCircle2
+  ArrowRight
 } from 'lucide-react';
-import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input";
-import { base44 } from '@/api/base44Client';
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   return (
     <footer className="bg-slate-950 text-white relative overflow-hidden">
       {/* Decorative Elements */}
@@ -122,49 +115,6 @@ export default function Footer() {
                   <span>Seg - Sex: 08:00 - 18:00</span>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div className="border-t border-slate-800">
-          <div className="container mx-auto px-6 lg:px-8 py-8">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-lg font-bold mb-1">Receba nossas novidades</h3>
-                <p className="text-slate-400 text-sm">Cadastre-se para receber dicas e atualizações contábeis</p>
-              </div>
-              {submitted ? (
-                <div className="flex items-center gap-2 text-green-400">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>Obrigado por se inscrever!</span>
-                </div>
-              ) : (
-                <form onSubmit={async (e) => {
-                  e.preventDefault();
-                  setIsSubmitting(true);
-                  await base44.entities.NewsletterLead.create({ email });
-                  setIsSubmitting(false);
-                  setSubmitted(true);
-                  setEmail('');
-                }} className="flex gap-3 w-full lg:w-auto">
-                  <Input 
-                    type="email"
-                    placeholder="Seu e-mail"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 rounded-xl w-full lg:w-64"
-                  />
-                  <Button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="bg-gradient-to-r from-red-700 to-red-800 hover:from-red-800 hover:to-red-900 px-6 rounded-xl"
-                  >
-                    {isSubmitting ? 'Enviando...' : 'Inscrever'}
-                  </Button>
-                </form>
-              )}
             </div>
           </div>
         </div>

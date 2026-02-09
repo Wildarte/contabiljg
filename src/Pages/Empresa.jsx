@@ -4,6 +4,11 @@ import {
   Shield, Award, Users, Target, Clock, Heart,
   CheckCircle2, Building2, Sparkles, TrendingUp
 } from 'lucide-react';
+import eduardoMendes from '../../Eduardo Mendes.png';
+import jaquelineGarcia from '../../Jaqueline Garcia.png';
+import neizeSilva from '../../Neize Silva.png';
+import priscilaSantos from '../../Priscila Santos.png';
+import tatianeTavares from '../../Tatiane Tavares .png';
 
 const values = [
   {
@@ -29,36 +34,62 @@ const values = [
 ];
 
 const timeline = [
-  { year: "1998", title: "Fundação", description: "Início das atividades com foco em pequenas empresas" },
-  { year: "2005", title: "Expansão", description: "Ampliação da equipe e dos serviços oferecidos" },
-  { year: "2012", title: "Modernização", description: "Implementação de sistemas digitais avançados" },
-  { year: "2018", title: "Consolidação", description: "Marca de 400 clientes ativos" },
-  { year: "2023", title: "Inovação", description: "Adoção de tecnologias de ponta e IA" },
+  {
+    year: "2000",
+    title: "Início da Experiência Profissional",
+    description: "Início da atuação na área contábil, construindo experiência prática no mercado."
+  },
+  {
+    year: "2013",
+    title: "Fundação do Escritório",
+    description: "Criação oficial do escritório de contabilidade, com foco em atendimento profissional e personalizado."
+  },
+  {
+    year: "2018",
+    title: "Consolidação",
+    description: "Estruturação dos processos internos e ampliação da carteira de clientes."
+  },
+  {
+    year: "2023",
+    title: "Inovação e Tecnologia",
+    description: "Adoção de ferramentas digitais, automações e soluções modernas para melhorar a gestão contábil."
+  },
+  {
+    year: "2026",
+    title: "26 Anos de Experiência",
+    description: "Mais de duas décadas de experiência em contabilidade, unindo tradição, conhecimento e inovação."
+  },
 ];
 
 const team = [
   {
-    name: "João Gabriel",
-    role: "Contador Responsável",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
+    name: "Jaqueline Garcia",
+    role: "Ceo contadora da empresa",
+    image: jaquelineGarcia,
     crc: "CRC 00000/O-0"
   },
   {
-    name: "Maria Santos",
-    role: "Especialista Tributária",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+    name: "Eduardo Mendes",
+    role: "Analista fiscal",
+    image: eduardoMendes,
     crc: "CRC 00000/O-0"
   },
   {
-    name: "Carlos Oliveira",
-    role: "Departamento Pessoal",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    name: "Neize Silva",
+    role: "Analista do departamento pessoal",
+    image: neizeSilva,
     crc: "CRC 00000/O-0"
   },
   {
-    name: "Ana Paula",
-    role: "Consultora Fiscal",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+    name: "Priscila Santos",
+    role: "Analista contábil",
+    image: priscilaSantos,
+    crc: "CRC 00000/O-0"
+  },
+  {
+    name: "Tatiane Tavares",
+    role: "Assistente de contabilidade",
+    image: tatianeTavares,
     crc: "CRC 00000/O-0"
   }
 ];
@@ -111,7 +142,7 @@ export default function Empresa() {
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  Com experiência desde 1998, a <strong className="text-slate-900">JG Contabilidade</strong> nasceu com a missão de 
+                  Com experiência desde 2000, a <strong className="text-slate-900">JG Contabilidade</strong> nasceu com a missão de 
                   oferecer serviços contábeis de excelência, combinando conhecimento técnico apurado 
                   com atendimento personalizado.
                 </p>
@@ -245,7 +276,7 @@ export default function Empresa() {
           </div>
 
           {/* Values Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-5 gap-6">
             {values.map((value, index) => (
               <motion.div
                 key={index}
@@ -276,20 +307,16 @@ export default function Empresa() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-700 text-sm font-medium mb-6">
-              <Clock className="w-4 h-4" />
-              Nossa Trajetória
-            </div>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
               Marcos da nossa história
             </h2>
           </motion.div>
 
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-5xl mx-auto">
             {/* Timeline Line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2 hidden md:block" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-slate-200 -translate-x-1/2 hidden md:block" />
             
-            <div className="space-y-12">
+            <div className="space-y-10 md:space-y-12">
               {timeline.map((item, index) => (
                 <motion.div
                   key={index}
@@ -297,19 +324,19 @@ export default function Empresa() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className={`relative flex items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                  className={`relative flex items-center gap-6 md:gap-10 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                 >
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                    <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg transition-shadow">
-                      <div className="text-red-700 font-bold text-lg mb-2">{item.year}</div>
+                  <div className={`flex-1 ${index % 2 === 0 ? 'md:text-left' : 'md:text-left'}`}>
+                    <div className="bg-white rounded-3xl p-6 md:p-7 border border-slate-100 shadow-[0_14px_30px_rgba(15,23,42,0.08)]">
+                      <div className="text-red-600 font-bold text-lg mb-2">{item.year}</div>
                       <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                      <p className="text-slate-600">{item.description}</p>
+                      <p className="text-slate-600 leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                   
                   {/* Center Point */}
-                  <div className="hidden md:flex w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-full items-center justify-center flex-shrink-0 z-10 shadow-lg">
-                    <CheckCircle2 className="w-6 h-6 text-white" />
+                  <div className="hidden md:flex w-12 h-12 bg-red-600 rounded-full items-center justify-center flex-shrink-0 z-10 shadow-[0_10px_20px_rgba(220,38,38,0.35)]">
+                    <div className="w-4 h-4 rounded-full bg-white/10 border-2 border-white" />
                   </div>
                   
                   <div className="flex-1 hidden md:block" />
@@ -320,6 +347,55 @@ export default function Empresa() {
         </div>
       </section>
 
+      {/* Team */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-14"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-50 border border-red-100 text-red-700 text-sm font-semibold mb-4">
+              <Users className="w-4 h-4" />
+              Nossa Equipe
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Profissionais especializados
+            </h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Contamos com uma equipe de contadores e consultores experientes, todos
+              registrados no CRC e em constante atualização profissional.
+            </p>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="bg-white rounded-3xl border border-slate-100 shadow-[0_12px_28px_rgba(15,23,42,0.08)] overflow-hidden"
+              >
+                <div className="relative">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-52 object-cover"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <div className="text-lg font-bold text-slate-900">{member.name}</div>
+                  <div className="text-slate-600 text-sm mb-2">{member.role}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
     </div>
   );
